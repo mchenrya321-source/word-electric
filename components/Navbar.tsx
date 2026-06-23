@@ -82,18 +82,43 @@ export function Navbar() {
 
         <button
           type="button"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gold text-charcoal shadow-md transition-colors hover:bg-gold-dark md:hidden"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gold shadow-md transition-opacity duration-200 hover:opacity-90 active:opacity-80 md:hidden ${
+            isMobileOpen ? "invisible" : ""
+          }`}
+          onClick={() => setIsMobileOpen(true)}
+          aria-label="Open menu"
           aria-expanded={isMobileOpen}
+          aria-hidden={isMobileOpen}
+          tabIndex={isMobileOpen ? -1 : 0}
         >
-          {isMobileOpen ? (
-            <X className="h-6 w-6" aria-hidden="true" />
-          ) : (
-            <Menu className="h-6 w-6" aria-hidden="true" />
-          )}
+          <Menu
+            className="h-[30px] w-[30px] text-white"
+            strokeWidth={2}
+            aria-hidden="true"
+          />
         </button>
       </nav>
+
+      <AnimatePresence>
+        {isMobileOpen && (
+          <motion.button
+            type="button"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-5 right-5 z-[60] flex h-11 w-11 items-center justify-center rounded-full bg-charcoal/90 shadow-lg transition-opacity duration-200 hover:opacity-80 active:opacity-70 md:hidden"
+            onClick={() => setIsMobileOpen(false)}
+            aria-label="Close menu"
+          >
+            <X
+              className="h-[30px] w-[30px] text-[#FFFFFF]"
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {isMobileOpen && (
