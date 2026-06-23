@@ -1,7 +1,7 @@
 import { siteConfig } from "@/lib/site-config";
 
 export function JsonLd() {
-  const { primary, secondary } = siteConfig.contacts;
+  const { owners } = siteConfig.contacts;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -10,7 +10,7 @@ export function JsonLd() {
     description: siteConfig.description,
     url: siteConfig.url,
     image: `${siteConfig.url}/logo.png`,
-    telephone: primary.phone,
+    telephone: owners.map((owner) => owner.phone),
     address: {
       "@type": "PostalAddress",
       addressLocality: "Rayville",
@@ -22,24 +22,20 @@ export function JsonLd() {
       name: siteConfig.serviceArea,
     },
     sameAs: [siteConfig.facebook],
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        telephone: primary.phone,
-        contactType: "customer service",
-        name: primary.name,
-        areaServed: "US",
-        availableLanguage: "English",
-      },
-      {
-        "@type": "ContactPoint",
-        telephone: secondary.phone,
-        contactType: "customer service",
-        name: secondary.name,
-        areaServed: "US",
-        availableLanguage: "English",
-      },
-    ],
+    founder: owners.map((owner) => ({
+      "@type": "Person",
+      name: owner.name,
+      jobTitle: owner.role,
+      telephone: owner.phone,
+    })),
+    contactPoint: owners.map((owner) => ({
+      "@type": "ContactPoint",
+      telephone: owner.phone,
+      contactType: "customer service",
+      name: owner.name,
+      areaServed: "US",
+      availableLanguage: "English",
+    })),
   };
 
   return (

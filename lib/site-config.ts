@@ -1,3 +1,17 @@
+const georgeWordIII = {
+  name: "George Word III",
+  role: "Co-Owner",
+  phone: "318-237-9740",
+  tel: "+13182379740",
+} as const;
+
+const georgeWordJr = {
+  name: "George Word Jr.",
+  role: "Co-Owner",
+  phone: "318-341-1112",
+  tel: "+13183411112",
+} as const;
+
 export const siteConfig = {
   name: "Word Electric, LLC",
   tagline: "Lighting the Future",
@@ -7,23 +21,18 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://wordelectricla.com",
   description:
     "Word Electric provides dependable residential and commercial electrical services throughout Rayville and Northeast Louisiana. Call today for professional electrical work.",
+  ownershipIntro:
+    "Owned and operated by George Word III and George Word Jr., Word Electric, LLC provides dependable electrical services throughout Northeast Louisiana.",
   facebook:
     "https://www.facebook.com/people/Word-ElectricLLC/100054304791040/",
   contacts: {
-    primary: {
-      name: "George Word III",
-      role: "Primary Contact",
-      phone: "318-237-9740",
-      tel: "+13182379740",
-    },
-    secondary: {
-      name: "George Word Jr.",
-      role: "Service & Scheduling",
-      phone: "318-341-1112",
-      tel: "+13183411112",
-    },
+    owners: [georgeWordIII, georgeWordJr],
+    primary: georgeWordIII,
+    secondary: georgeWordJr,
   },
 } as const;
+
+export type Owner = (typeof siteConfig.contacts.owners)[number];
 
 export const navLinks = [
   { label: "Home", href: "#home" },

@@ -24,18 +24,11 @@ export function About() {
               centered={false}
             />
             <div className="space-y-3 text-sm leading-relaxed text-muted md:space-y-4 md:text-base">
+              <p>{siteConfig.ownershipIntro}</p>
               <p>
-                Word Electric, LLC is a trusted electrical contractor based in{" "}
-                {siteConfig.location}, proudly serving {siteConfig.serviceArea}.
-                We deliver quality workmanship, honest service, and dependable
-                electrical solutions for residential and commercial customers.
-              </p>
-              <p>
-                Whether you need a repair, a panel upgrade, or complete wiring
-                for a new build, our team approaches every job with dedication
-                to safety and excellence. When you choose Word Electric, you get
-                a local team that values clear communication and getting the job
-                done right the first time.
+                Based in {siteConfig.location}, we deliver quality workmanship,
+                honest service, and dependable electrical solutions for
+                residential and commercial customers across the region.
               </p>
             </div>
           </div>

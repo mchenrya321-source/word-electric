@@ -140,7 +140,7 @@ export function Navbar() {
               transition={{ duration: 0.2, ease: "easeOut" }}
               className="relative z-50 border-t border-gray-100 bg-white shadow-lg md:hidden"
             >
-              <ul className="px-4 py-2">
+              <ul className="px-4 py-2 pb-4">
                 {navLinks.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -153,24 +153,6 @@ export function Navbar() {
                   </li>
                 ))}
               </ul>
-
-              <div className="space-y-3 border-t border-gray-100 px-4 py-4">
-                <a
-                  href={`tel:${siteConfig.contacts.primary.tel}`}
-                  className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-lg bg-gold px-4 py-3 text-base font-semibold text-charcoal"
-                >
-                  <Phone className="h-5 w-5" aria-hidden="true" />
-                  Call {siteConfig.contacts.primary.phone}
-                </a>
-                <a
-                  href={`tel:${siteConfig.contacts.secondary.tel}`}
-                  className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-lg border-2 border-charcoal/15 px-4 py-3 text-sm font-semibold text-charcoal"
-                >
-                  <Phone className="h-4 w-4" aria-hidden="true" />
-                  {siteConfig.contacts.secondary.name} ·{" "}
-                  {siteConfig.contacts.secondary.phone}
-                </a>
-              </div>
             </motion.div>
           </>
         )}

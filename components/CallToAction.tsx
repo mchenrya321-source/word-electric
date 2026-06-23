@@ -1,13 +1,10 @@
-"use client";
-
-import { CallButton } from "@/components/ui/CallButton";
 import { siteConfig } from "@/lib/site-config";
 
 export function CallToAction() {
   const { primary, secondary } = siteConfig.contacts;
 
   return (
-    <section className="relative overflow-hidden bg-charcoal py-12 md:py-20">
+    <section className="relative hidden overflow-hidden bg-charcoal py-12 md:block md:py-20">
       <div
         className="absolute inset-0 opacity-5"
         aria-hidden="true"
@@ -18,30 +15,26 @@ export function CallToAction() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 text-center md:px-6 lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-white md:text-4xl">
-          Need an Electrician?
+        <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
+          Need electrical work done?
         </h2>
 
-        <p className="mx-auto mt-3 max-w-xl text-base text-gray-300 md:mt-4 md:text-lg">
-          Call today for dependable electrical service in Rayville and
-          throughout Northeast Louisiana.
-        </p>
-
-        <div className="mt-6 flex w-full flex-col items-stretch justify-center gap-3 sm:mx-auto sm:max-w-lg md:mt-8 md:max-w-none md:flex-row md:items-center md:justify-center">
-          <CallButton
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <a
             href={`tel:${primary.tel}`}
-            label={`Call ${primary.name}`}
-            sublabel={primary.phone}
-            variant="primary"
-            className="w-full justify-center md:w-auto"
-          />
-          <CallButton
-            href={`tel:${secondary.tel}`}
-            label={`Call ${secondary.name}`}
-            sublabel={secondary.phone}
-            variant="outline"
-            className="w-full justify-center md:w-auto"
-          />
+            className="inline-flex items-center justify-center rounded-lg bg-gold px-8 py-3.5 text-base font-semibold text-charcoal transition-colors hover:bg-gold-dark"
+          >
+            Call Word Electric
+          </a>
+          <p className="text-sm text-gray-300">
+            Or call{" "}
+            <a
+              href={`tel:${secondary.tel}`}
+              className="font-medium text-white transition-colors hover:text-gold"
+            >
+              {secondary.name} at {secondary.phone}
+            </a>
+          </p>
         </div>
       </div>
     </section>

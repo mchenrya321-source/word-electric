@@ -70,7 +70,6 @@ export function Hero() {
           <CallButton
             href={`tel:${primary.tel}`}
             label="Call Now"
-            sublabel={`${primary.name} · ${primary.phone}`}
             variant="primary"
             className="w-full justify-center sm:w-auto"
           />
