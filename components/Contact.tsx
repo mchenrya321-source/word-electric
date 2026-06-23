@@ -2,10 +2,9 @@
 
 import { useState, FormEvent } from "react";
 import { Phone, Mail, MapPin, User } from "lucide-react";
-import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { siteConfig, serviceOptions } from "@/lib/site-config";
+import { siteConfig, serviceOptions, sectionPadding } from "@/lib/site-config";
 
 /*
  * ============================================================
@@ -73,24 +72,49 @@ export function Contact() {
   };
 
   return (
-    <AnimatedSection
-      id="contact"
-      className="bg-white py-20 md:py-28 lg:py-32"
-    >
+    <AnimatedSection id="contact" className={`bg-white ${sectionPadding}`}>
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <SectionHeading
           title="Get In Touch"
-          subtitle="Ready to start your project? Call us directly or request a quote below."
+          subtitle="Call us directly or request a quote below."
         />
 
-        <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
-          <div className="space-y-8 lg:col-span-2">
+        {/* Prominent mobile call buttons */}
+        <div className="mb-6 grid gap-3 sm:hidden">
+          <a
+            href={`tel:${primary.tel}`}
+            className="flex min-h-[52px] flex-col items-center justify-center rounded-lg bg-gold px-4 py-3 text-center font-semibold text-charcoal"
+          >
+            <span className="text-xs font-medium opacity-80">
+              {primary.name}
+            </span>
+            <span className="flex items-center gap-1.5 text-base">
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              {primary.phone}
+            </span>
+          </a>
+          <a
+            href={`tel:${secondary.tel}`}
+            className="flex min-h-[52px] flex-col items-center justify-center rounded-lg border-2 border-charcoal/15 px-4 py-3 text-center font-semibold text-charcoal"
+          >
+            <span className="text-xs font-medium text-muted">
+              {secondary.name}
+            </span>
+            <span className="flex items-center gap-1.5 text-base">
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              {secondary.phone}
+            </span>
+          </a>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-5 lg:gap-12">
+          <div className="hidden space-y-4 md:block lg:col-span-2 lg:space-y-5">
             {[primary, secondary].map((contact) => (
               <div
                 key={contact.tel}
-                className="rounded-xl border border-gray-100 bg-light-gray p-6"
+                className="rounded-xl border border-gray-100 bg-light-gray p-5"
               >
-                <div className="mb-3 flex items-center gap-3">
+                <div className="mb-2 flex items-center gap-3">
                   <div className="rounded-lg bg-gold/10 p-2">
                     <User className="h-5 w-5 text-gold" aria-hidden="true" />
                   </div>
@@ -111,14 +135,14 @@ export function Contact() {
               </div>
             ))}
 
-            <div className="rounded-xl border border-gray-100 bg-light-gray p-6">
+            <div className="rounded-xl border border-gray-100 bg-light-gray p-5">
               <div className="flex items-start gap-3">
                 <div className="rounded-lg bg-gold/10 p-2">
                   <MapPin className="h-5 w-5 text-gold" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-charcoal">Service Area</h3>
-                  <p className="mt-1 text-muted">
+                  <p className="mt-1 text-sm text-muted">
                     {siteConfig.location}
                     <br />
                     Serving {siteConfig.serviceArea}
@@ -130,18 +154,14 @@ export function Contact() {
 
           <div className="lg:col-span-3">
             {isSubmitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex h-full min-h-[400px] flex-col items-center justify-center rounded-xl border border-gold/30 bg-gold/5 p-8 text-center"
-              >
+              <div className="flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-gold/30 bg-gold/5 p-6 text-center md:min-h-[360px] md:p-8">
                 <div className="mb-4 rounded-full bg-gold/20 p-4">
                   <Mail className="h-8 w-8 text-gold" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-semibold text-charcoal">
                   Thank You!
                 </h3>
-                <p className="mt-2 max-w-md text-muted">
+                <p className="mt-2 max-w-md text-sm text-muted md:text-base">
                   Your request has been received. One of our team members will
                   contact you shortly.
                 </p>
@@ -152,18 +172,18 @@ export function Contact() {
                 >
                   Submit another request
                 </button>
-              </motion.div>
+              </div>
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="rounded-xl border border-gray-100 bg-light-gray p-6 md:p-8"
+                className="rounded-xl border border-gray-100 bg-light-gray p-5 md:p-6"
                 noValidate
               >
-                <div className="grid gap-5 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label
                       htmlFor="name"
-                      className="mb-1.5 block text-sm font-medium text-charcoal"
+                      className="mb-1 block text-sm font-medium text-charcoal"
                     >
                       Name <span className="text-gold">*</span>
                     </label>
@@ -174,7 +194,7 @@ export function Contact() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-charcoal transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+                      className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-charcoal focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
                       placeholder="Your full name"
                     />
                   </div>
@@ -182,7 +202,7 @@ export function Contact() {
                   <div>
                     <label
                       htmlFor="phone"
-                      className="mb-1.5 block text-sm font-medium text-charcoal"
+                      className="mb-1 block text-sm font-medium text-charcoal"
                     >
                       Phone Number <span className="text-gold">*</span>
                     </label>
@@ -193,7 +213,7 @@ export function Contact() {
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-charcoal transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+                      className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-charcoal focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
                       placeholder="(318) 555-0123"
                     />
                   </div>
@@ -201,7 +221,7 @@ export function Contact() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="mb-1.5 block text-sm font-medium text-charcoal"
+                      className="mb-1 block text-sm font-medium text-charcoal"
                     >
                       Email <span className="text-gold">*</span>
                     </label>
@@ -212,7 +232,7 @@ export function Contact() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-charcoal transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+                      className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-charcoal focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
                       placeholder="you@example.com"
                     />
                   </div>
@@ -220,7 +240,7 @@ export function Contact() {
                   <div>
                     <label
                       htmlFor="address"
-                      className="mb-1.5 block text-sm font-medium text-charcoal"
+                      className="mb-1 block text-sm font-medium text-charcoal"
                     >
                       Project Address
                     </label>
@@ -230,7 +250,7 @@ export function Contact() {
                       name="address"
                       value={formData.address}
                       onChange={handleChange}
-                      className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-charcoal transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+                      className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-charcoal focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
                       placeholder="Street address, city"
                     />
                   </div>
@@ -238,7 +258,7 @@ export function Contact() {
                   <div className="sm:col-span-2">
                     <label
                       htmlFor="service"
-                      className="mb-1.5 block text-sm font-medium text-charcoal"
+                      className="mb-1 block text-sm font-medium text-charcoal"
                     >
                       Service Needed <span className="text-gold">*</span>
                     </label>
@@ -248,7 +268,7 @@ export function Contact() {
                       required
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-charcoal transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+                      className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-charcoal focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
                     >
                       <option value="">Select a service</option>
                       {serviceOptions.map((option) => (
@@ -262,17 +282,17 @@ export function Contact() {
                   <div className="sm:col-span-2">
                     <label
                       htmlFor="message"
-                      className="mb-1.5 block text-sm font-medium text-charcoal"
+                      className="mb-1 block text-sm font-medium text-charcoal"
                     >
                       Message
                     </label>
                     <textarea
                       id="message"
                       name="message"
-                      rows={4}
+                      rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full resize-none rounded-lg border border-gray-200 bg-white px-4 py-3 text-charcoal transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+                      className="w-full resize-none rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-charcoal focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
                       placeholder="Tell us about your project..."
                     />
                   </div>
@@ -281,7 +301,7 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-6 w-full rounded-lg bg-gold px-6 py-3.5 text-sm font-semibold text-charcoal transition-colors hover:bg-gold-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                  className="mt-5 w-full rounded-lg bg-gold px-6 py-3.5 text-sm font-semibold text-charcoal transition-colors hover:bg-gold-dark disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isSubmitting ? "Sending..." : "Request a Quote"}
                 </button>

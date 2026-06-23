@@ -33,98 +33,71 @@ export const navLinks = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
-export const services = [
+export const mainServices = [
   {
     title: "Residential Electrical",
     description:
-      "Complete electrical solutions for your home, from outlets and switches to whole-home upgrades.",
+      "Outlets, switches, upgrades, and complete home electrical solutions.",
     icon: "Home",
   },
   {
     title: "Commercial Electrical",
     description:
-      "Reliable electrical systems for offices, retail spaces, and commercial properties.",
+      "Reliable electrical systems for offices, retail, and commercial properties.",
     icon: "Building2",
   },
   {
-    title: "Electrical Repairs",
+    title: "Repairs & Troubleshooting",
     description:
-      "Fast, dependable repairs to restore power and keep your property safe.",
+      "Fast diagnosis and dependable repairs to restore power and safety.",
     icon: "Wrench",
   },
   {
-    title: "Troubleshooting",
+    title: "Panels & Breakers",
     description:
-      "Expert diagnosis of electrical issues to find the root cause and fix it right.",
-    icon: "Search",
-  },
-  {
-    title: "Breaker Panels",
-    description:
-      "Panel upgrades, replacements, and breaker service for safe, reliable power distribution.",
+      "Panel upgrades, replacements, and breaker service for safe power distribution.",
     icon: "LayoutGrid",
   },
   {
-    title: "Lighting Installation",
+    title: "Lighting & Ceiling Fans",
     description:
-      "Indoor and outdoor lighting design and installation to brighten your space.",
+      "Indoor and outdoor lighting plus professional ceiling fan installation.",
     icon: "Lightbulb",
   },
   {
-    title: "Ceiling Fans",
+    title: "New Construction & Remodels",
     description:
-      "Professional ceiling fan installation and wiring for comfort and efficiency.",
-    icon: "Fan",
-  },
-  {
-    title: "Generator Connections",
-    description:
-      "Safe generator hookups and transfer switch installation for backup power.",
-    icon: "Zap",
-  },
-  {
-    title: "New Construction Wiring",
-    description:
-      "Full electrical rough-in and finish work for new builds and additions.",
+      "Full rough-in and finish wiring for new builds, additions, and renovations.",
     icon: "HardHat",
   },
-  {
-    title: "Remodel Wiring",
-    description:
-      "Electrical updates and rewiring tailored to your renovation project.",
-    icon: "Hammer",
-  },
-  {
-    title: "Electrical Maintenance",
-    description:
-      "Preventive maintenance to keep your electrical systems running smoothly.",
-    icon: "ShieldCheck",
-  },
 ] as const;
+
+export const additionalServicesText =
+  "We also handle generator connections, electrical maintenance, and custom project work.";
 
 export const whyChooseUs = [
   {
     title: "Licensed & Professional",
     description:
-      "Our team brings professional standards and licensed expertise to every job, large or small.",
+      "Professional standards and licensed expertise on every job, large or small.",
     icon: "BadgeCheck",
   },
   {
     title: "Reliable Communication",
     description:
-      "We keep you informed from the first call through project completion so there are no surprises.",
+      "Clear updates from the first call through project completion.",
     icon: "MessageCircle",
   },
   {
     title: "Quality Workmanship",
     description:
-      "Every installation and repair is done with care, precision, and attention to detail.",
+      "Every installation and repair done with care, precision, and attention to detail.",
     icon: "Award",
   },
   {
     title: "Customer Satisfaction",
     description:
-      "Your satisfaction is our priority. We stand behind our work and treat your property with respect.",
+      "We stand behind our work and treat your property with respect.",
     icon: "HeartHandshake",
   },
 ] as const;
@@ -147,14 +120,14 @@ export const galleryImages = [
 export const serviceOptions = [
   "Residential Electrical",
   "Commercial Electrical",
-  "Electrical Repairs",
-  "Troubleshooting",
-  "Breaker Panels",
-  "Lighting Installation",
-  "Ceiling Fans",
+  "Repairs & Troubleshooting",
+  "Panels & Breakers",
+  "Lighting & Ceiling Fans",
+  "New Construction & Remodels",
   "Generator Connections",
-  "New Construction Wiring",
-  "Remodel Wiring",
   "Electrical Maintenance",
   "Other",
 ] as const;
+
+/** Shared section vertical padding — tighter on mobile */
+export const sectionPadding = "py-12 md:py-20 lg:py-24";

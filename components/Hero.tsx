@@ -2,17 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { CallButton } from "@/components/ui/CallButton";
 import { siteConfig } from "@/lib/site-config";
 
+const fadeUp = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+};
+
 export function Hero() {
   const { primary } = siteConfig.contacts;
+  const prefersReducedMotion = useReducedMotion();
+  const motionProps = prefersReducedMotion ? {} : fadeUp;
+  const t = (delay: number) =>
+    prefersReducedMotion
+      ? undefined
+      : { duration: 0.35, ease: "easeOut" as const, delay };
 
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      className="relative flex min-h-[75vh] items-center justify-center overflow-hidden md:min-h-screen"
     >
       <Image
         src="/gallery/1.jpg"
@@ -25,61 +36,56 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-charcoal/70" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-32 text-center md:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-24 text-center md:px-6 md:pb-32 md:pt-32 lg:px-8">
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold md:text-base"
+          {...motionProps}
+          transition={t(0)}
+          className="mb-3 text-xs font-semibold uppercase tracking-widest text-gold md:mb-4 md:text-base"
         >
           {siteConfig.tagline}
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto max-w-4xl text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl"
+          {...motionProps}
+          transition={t(0.05)}
+          className="mx-auto max-w-4xl text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl"
         >
           Reliable Electrical Services You Can Count On
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-200 md:text-xl"
+          {...motionProps}
+          transition={t(0.1)}
+          className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-200 md:mt-6 md:text-xl"
         >
           Serving homeowners and businesses throughout Northeast Louisiana with
           dependable, professional electrical solutions.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          {...motionProps}
+          transition={t(0.15)}
+          className="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:mx-auto sm:max-w-md sm:flex-row sm:items-center md:mt-10 md:max-w-none"
         >
           <CallButton
             href={`tel:${primary.tel}`}
             label="Call Now"
             sublabel={`${primary.name} · ${primary.phone}`}
             variant="primary"
-            className="w-full sm:w-auto"
+            className="w-full justify-center sm:w-auto"
           />
           <Link
             href="#contact"
-            className="inline-flex w-full items-center justify-center rounded-lg border-2 border-white/30 bg-transparent px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-gold hover:bg-gold/10 md:text-base sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-lg border-2 border-white/30 bg-transparent px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:border-gold hover:bg-gold/10 md:text-base sm:w-auto"
           >
             Request a Quote
           </Link>
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-8 text-sm text-gray-300"
+          {...motionProps}
+          transition={t(0.2)}
+          className="mt-6 text-xs text-gray-300 md:mt-8 md:text-sm"
         >
           {siteConfig.location} · Serving {siteConfig.serviceArea}
         </motion.p>

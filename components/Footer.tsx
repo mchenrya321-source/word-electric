@@ -9,16 +9,16 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-charcoal text-gray-300">
-      <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-charcoal pb-24 text-gray-300 md:pb-0">
+      <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-16 lg:px-8">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           <div className="lg:col-span-1">
             <Image
               src="/logo.png"
               alt="Word Electric, LLC"
               width={160}
               height={53}
-              className="mb-4 h-14 w-auto brightness-0 invert"
+              className="mb-3 h-11 w-auto brightness-0 invert md:mb-4 md:h-14"
             />
             <p className="text-sm font-medium text-gold">
               {siteConfig.tagline}
@@ -95,7 +95,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-gray-400">
+        <div className="mt-8 border-t border-white/10 pt-6 text-center text-sm text-gray-400 md:mt-12 md:pt-8">
           <p>
             &copy; {currentYear} {siteConfig.name}. All rights reserved.
           </p>

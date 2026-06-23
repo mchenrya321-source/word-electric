@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { galleryImages } from "@/lib/site-config";
+import { galleryImages, sectionPadding } from "@/lib/site-config";
 
 export function Gallery() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -47,36 +47,33 @@ export function Gallery() {
   return (
     <AnimatedSection
       id="gallery"
-      className="bg-light-gray py-20 md:py-28 lg:py-32"
+      className={`bg-light-gray ${sectionPadding}`}
     >
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <SectionHeading
           title="Our Work"
-          subtitle="A look at the quality electrical work we deliver for customers across Northeast Louisiana."
+          subtitle="Quality electrical work for customers across Northeast Louisiana."
         />
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Compact 2-column grid on mobile, 3 on desktop */}
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3 lg:gap-4">
           {galleryImages.map((image, index) => (
-            <motion.button
+            <button
               key={image.src}
               type="button"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
               onClick={() => setSelectedIndex(index)}
-              className="group relative aspect-[4/3] overflow-hidden rounded-xl shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+              className="group relative aspect-[4/3] overflow-hidden rounded-lg shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 md:rounded-xl md:shadow-md"
               aria-label={`View image: ${image.alt}`}
             >
               <Image
                 src={image.src}
                 alt={image.alt}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
               />
-              <div className="absolute inset-0 bg-charcoal/0 transition-colors duration-300 group-hover:bg-charcoal/20" />
-            </motion.button>
+              <div className="absolute inset-0 bg-charcoal/0 transition-colors duration-200 group-hover:bg-charcoal/15" />
+            </button>
           ))}
         </div>
       </div>
@@ -87,7 +84,8 @@ export function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/95 p-4 backdrop-blur-sm"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/95 p-4"
             onClick={close}
             role="dialog"
             aria-modal="true"
@@ -96,7 +94,7 @@ export function Gallery() {
             <button
               type="button"
               onClick={close}
-              className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 md:right-8 md:top-8"
+              className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
               aria-label="Close gallery"
             >
               <X className="h-6 w-6" />
@@ -114,11 +112,7 @@ export function Gallery() {
               <ChevronLeft className="h-6 w-6" />
             </button>
 
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+            <div
               className="relative max-h-[85vh] w-full max-w-5xl"
               onClick={(e) => e.stopPropagation()}
             >
@@ -130,10 +124,7 @@ export function Gallery() {
                 className="mx-auto max-h-[85vh] w-auto rounded-lg object-contain"
                 priority
               />
-              <p className="mt-4 text-center text-sm text-gray-300">
-                {galleryImages[selectedIndex].alt}
-              </p>
-            </motion.div>
+            </div>
 
             <button
               type="button"

@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
+import { MobileCallBar } from "@/components/MobileCallBar";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Services } from "@/components/Services";
@@ -14,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="pb-20 md:pb-0">
         <Hero />
         <About />
         <Services />
@@ -24,6 +23,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <MobileCallBar />
     </>
   );
 }

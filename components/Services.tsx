@@ -4,72 +4,70 @@ import {
   Home,
   Building2,
   Wrench,
-  Search,
   LayoutGrid,
   Lightbulb,
-  Fan,
-  Zap,
   HardHat,
-  Hammer,
-  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { services } from "@/lib/site-config";
+import {
+  mainServices,
+  additionalServicesText,
+  sectionPadding,
+} from "@/lib/site-config";
 
 const iconMap: Record<string, LucideIcon> = {
   Home,
   Building2,
   Wrench,
-  Search,
   LayoutGrid,
   Lightbulb,
-  Fan,
-  Zap,
   HardHat,
-  Hammer,
-  ShieldCheck,
 };
 
 export function Services() {
   return (
     <AnimatedSection
       id="services"
-      className="bg-light-gray py-20 md:py-28 lg:py-32"
+      className={`bg-light-gray ${sectionPadding}`}
     >
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <SectionHeading
           title="Our Electrical Services"
-          subtitle="Comprehensive electrical solutions for homes and businesses across Northeast Louisiana."
+          subtitle="Professional electrical solutions for homes and businesses across Northeast Louisiana."
         />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {services.map((service, index) => {
+        <div className="grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-3">
+          {mainServices.map((service) => {
             const Icon = iconMap[service.icon];
             return (
-              <motion.article
+              <article
                 key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/30 hover:shadow-lg"
+                className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-shadow duration-200 hover:shadow-md md:rounded-xl md:p-5"
               >
-                <div className="mb-4 inline-flex rounded-lg bg-gold/10 p-3 text-gold transition-colors group-hover:bg-gold group-hover:text-charcoal">
-                  {Icon && <Icon className="h-6 w-6" aria-hidden="true" />}
+                <div className="mb-2 inline-flex rounded-md bg-gold/10 p-2 text-gold md:mb-3 md:rounded-lg md:p-2.5">
+                  {Icon && (
+                    <Icon
+                      className="h-4 w-4 md:h-5 md:w-5"
+                      aria-hidden="true"
+                    />
+                  )}
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-charcoal">
+                <h3 className="mb-1 text-sm font-semibold leading-snug text-charcoal md:mb-2 md:text-base">
                   {service.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted">
+                <p className="hidden text-sm leading-relaxed text-muted sm:block">
                   {service.description}
                 </p>
-              </motion.article>
+              </article>
             );
           })}
         </div>
+
+        <p className="mt-6 text-center text-sm text-muted md:mt-8 md:text-base">
+          {additionalServicesText}
+        </p>
       </div>
     </AnimatedSection>
   );

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { CallButton } from "@/components/ui/CallButton";
 import { siteConfig } from "@/lib/site-config";
 
@@ -8,7 +7,7 @@ export function CallToAction() {
   const { primary, secondary } = siteConfig.contacts;
 
   return (
-    <section className="relative overflow-hidden bg-charcoal py-20 md:py-28">
+    <section className="relative overflow-hidden bg-charcoal py-12 md:py-20">
       <div
         className="absolute inset-0 opacity-5"
         aria-hidden="true"
@@ -19,47 +18,31 @@ export function CallToAction() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 text-center md:px-6 lg:px-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl"
-        >
+        <h2 className="text-2xl font-bold tracking-tight text-white md:text-4xl">
           Need an Electrician?
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mx-auto mt-4 max-w-xl text-lg text-gray-300"
-        >
+        <p className="mx-auto mt-3 max-w-xl text-base text-gray-300 md:mt-4 md:text-lg">
           Call today for dependable electrical service in Rayville and
           throughout Northeast Louisiana.
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-        >
+        <div className="mt-6 flex w-full flex-col items-stretch justify-center gap-3 sm:mx-auto sm:max-w-lg md:mt-8 md:max-w-none md:flex-row md:items-center md:justify-center">
           <CallButton
             href={`tel:${primary.tel}`}
             label={`Call ${primary.name}`}
             sublabel={primary.phone}
             variant="primary"
+            className="w-full justify-center md:w-auto"
           />
           <CallButton
             href={`tel:${secondary.tel}`}
             label={`Call ${secondary.name}`}
             sublabel={secondary.phone}
             variant="outline"
+            className="w-full justify-center md:w-auto"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );
